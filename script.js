@@ -34,7 +34,7 @@ function createOffer() {
     .catch(log);
   pc.onicecandidate = e => {
     if (e.candidate) return;
-    offer.value = btoa(pc.localDescription.sdp);
+    offer.value = bytesToBase64(pako.gzip(pc.localDescription.sdp));
     offer.select();
     answer.placeholder = "Paste answer here";
   };
@@ -43,14 +43,14 @@ function createOffer() {
 offer.onkeypress = e => {
   if (!enterPressed(e) || pc.signalingState != "stable") return;
   button.disabled = offer.disabled = true;
-  var desc = new RTCSessionDescription({ type:"offer", sdp:atob(offer.value) });
+  var desc = new RTCSessionDescription({ type:"offer", sdp: pako.ungzip(base64ToBytes(offer.value), {to: 'string'}) });
   pc.setRemoteDescription(desc)
     .then(() => pc.createAnswer()).then(d => pc.setLocalDescription(d))
     .catch(log);
   pc.onicecandidate = e => {
     if (e.candidate) return;
     answer.focus();
-    answer.value = btoa(pc.localDescription.sdp);
+    answer.value = bytesToBase64(pako.gzip(pc.localDescription.sdp));
     answer.select();
   };
 };
@@ -58,7 +58,7 @@ offer.onkeypress = e => {
 answer.onkeypress = e => {
   if (!enterPressed(e) || pc.signalingState != "have-local-offer") return;
   answer.disabled = true;
-  var desc = new RTCSessionDescription({ type:"answer", sdp: atob(answer.value) });
+  var desc = new RTCSessionDescription({ type:"answer", sdp: pako.ungzip(base64ToBytes(answer.value), {to: 'string'}) });
   pc.setRemoteDescription(desc).catch(log);
 };
 
