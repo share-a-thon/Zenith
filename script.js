@@ -1,6 +1,4 @@
-var server = { urls: [] };
-
-var dc, pc = new RTCPeerConnection({ iceServers: [server] });
+var dc, pc = new RTCPeerConnection();
 pc.onaddstream = e => v2.srcObject = e.stream;
 pc.ondatachannel = e => dcInit(dc = e.channel);
 pc.oniceconnectionstatechange = e => log(pc.iceConnectionState);
