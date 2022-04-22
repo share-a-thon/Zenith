@@ -8,7 +8,23 @@ var haveGum = navigator.mediaDevices.getUserMedia({video:true, audio:true})
 
 function dcInit() {
   dc.onopen = () => log("Chat!");
-  dc.onmessage = e => log(e.data);
+  dc.onmessage = e => {
+		process(JSON.parse(e.data));
+  }
+}
+
+function process(m) {
+	switch(m.type) {
+		case 'chat':
+			log(m.val);
+			break;
+		case 'file':
+			saveFile(m.name, m.val);
+			break;
+		default:
+			console.log("unknown message")
+			console.log(m)
+	}
 }
 
 function createOffer() {
@@ -42,16 +58,37 @@ offer.onkeypress = e => {
 answer.onkeypress = e => {
   if (!enterPressed(e) || pc.signalingState != "have-local-offer") return;
   answer.disabled = true;
-  var desc = new RTCSessionDescription({ type:"answer", sdp:atob(answer.value) });
+  var desc = new RTCSessionDescription({ type:"answer", sdp: atob(answer.value) });
   pc.setRemoteDescription(desc).catch(log);
 };
 
 chat.onkeypress = e => {
   if (!enterPressed(e)) return;
-  dc.send(chat.value);
+  dc.send(JSON.stringify({type: 'chat', val: chat.value}));
   log(chat.value);
   chat.value = "";
 };
+
+file.onchange = e => {
+	file = e.target.files[0];
+    var r = new FileReader();
+    r.onload = function(e) {
+      sendFile(e.target.result, file.name);
+    }
+    r.readAsText(file);
+}
+
+function sendFile(file, name) {
+    dc.send(JSON.stringify({type: "file", name: name, val: btoa(unescape(encodeURIComponent(file)))}));
+}
+
+function saveFile(name, cont) {
+	console.log(cont);
+	var blob = new Blob([decodeURIComponent(escape(atob(cont)))], {
+		type: "application/octet-stream"
+	});
+	saveAs(blob, name);
+}
 
 var enterPressed = e => e.keyCode == 13;
 var log = msg => div.innerHTML += "<p>" + msg + "</p>";
