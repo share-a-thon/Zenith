@@ -1,14 +1,52 @@
 <html>
 	<head>
+		<link rel="stylesheet" href="main.css">
 	</head>
 	<body>
-<video id="v1" height="120" width="160" autoplay muted></video>
-<video id="v2" height="120" width="160" autoplay></video><br>
-<button id="button" onclick="createOffer()">Offer:</button>
-<textarea id="offer" placeholder="Paste offer here"></textarea><br>
-Answer: <textarea id="answer"></textarea><br><div id="div"></div>
-Chat: <input id="chat"></input><br>
-Send: <input id="file" type="file"></input><br>
+<div class="header">
+	<div class="title">Zenith</div>
+</div>
+<div class="main">
+	<div class="vids">
+		<video id="v1" height="120" width="160" poster="./novid.png" autoplay muted></video>
+		<video id="v2" height="120" width="160" poster="./novid.png" autoplay></video><br>
+	</div>
+	<table>
+		<tr>
+			<td>
+		<button id="button" onclick="createOffer()">Offer:</button>
+			</td>
+			<td>
+		<textarea id="offer" placeholder="Paste offer here"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>
+		<p>Answer:</p>
+			</td>
+			<td>
+<textarea id="answer"></textarea><br><div id="div"></div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+		<p>Chat:</p>
+			</td>
+			<td>
+<input id="chat"></input>
+			</td>
+		</tr>
+		<tr>
+			<td>
+		<p>Send:</p>
+			</td>
+			<td>
+<input id="file" type="file"></input>
+			</td>
+		</tr>
+	</table>
+	<div id="logbox"></div>
+</div>
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 <script src="./FileSaver.js"></script>
 <script src="./pako.js"></script>
