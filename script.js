@@ -75,7 +75,7 @@ file.onchange = e => {
     r.onload = function(e) {
       sendFile(e.target.result, file.name);
     }
-    r.readAsBlob(file);
+    r.readAsText(file);
 }
 
 function sendFile(file, name) {
@@ -91,4 +91,4 @@ function saveFile(name, cont) {
 }
 
 var enterPressed = e => e.keyCode == 13;
-var log = msg => div.innerHTML += "<p>" + msg + "</p>";
+var log = msg => document.getElementById("logbox").innerText += msg + "\n\n";

@@ -33,3 +33,14 @@ body {
 .main table td {
 	padding: 5px 20px;
 }
+
+#logbox {
+	height: 200px;
+	width: 400px;
+	margin: 20px;
+	padding: 10px;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 5px;
+	overflow: auto;
+}
