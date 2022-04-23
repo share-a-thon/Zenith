@@ -15,23 +15,7 @@
 	<div class="circle one"></div>
 	<div class="circle two"></div>
 	<div class="circle three"></div>
-	<table>
-		<tr>
-			<td>
-		<button id="button" onclick="createOffer()">Offer:</button>
-			</td>
-			<td>
-		<textarea id="offer" placeholder="Paste offer here"></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td>
-		<p>Answer:</p>
-			</td>
-			<td>
-<textarea id="answer"></textarea><br><div id="div"></div>
-			</td>
-		</tr>
+	<table class="tab">
 		<tr>
 			<td>
 		<p>Chat:</p>
@@ -50,6 +34,26 @@
 		</tr>
 	</table>
 	<div id="logbox"></div>
+</div>
+<div class="dialog" id="conn">
+	<table class="tab">
+		<tr>
+			<td>
+		<button id="button" onclick="createOffer()">Offer:</button>
+			</td>
+			<td>
+		<textarea id="offer" placeholder="Paste offer here"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>
+		<p>Answer:</p>
+			</td>
+			<td>
+<textarea id="answer"></textarea><br><div id="div"></div>
+			</td>
+		</tr>
+	</table>
 </div>
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 <script src="./FileSaver.js"></script>

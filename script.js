@@ -7,7 +7,10 @@ var haveGum = navigator.mediaDevices.getUserMedia({video:true, audio:true})
   .then(stream => pc.addStream(v1.srcObject = stream)).catch(log);
 
 function dcInit() {
-  dc.onopen = () => log("Chat!");
+  dc.onopen = () => {
+		log("Chat!");
+	document.getElementById("conn").remove();
+	}
   dc.onmessage = e => {
 		process(JSON.parse(e.data));
   }
@@ -60,6 +63,7 @@ answer.onkeypress = e => {
   answer.disabled = true;
   var desc = new RTCSessionDescription({ type:"answer", sdp: pako.ungzip(base64ToBytes(answer.value), {to: 'string'}) });
   pc.setRemoteDescription(desc).catch(log);
+	document.getElementById("conn").remove();
 };
 
 chat.onkeypress = e => {

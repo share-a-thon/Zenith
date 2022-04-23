@@ -38,7 +38,7 @@ body {
 	border-radius: 5px;
 }
 
-.main table td {
+.main .tab td {
 	padding: 5px 20px;
 }
 
@@ -54,7 +54,7 @@ body {
 }
 
 textarea {
-	border: 0px;
+	border: 1px solid black;
 	border-radius: 5px;
 	padding: 5px;
 }
@@ -140,4 +140,20 @@ button {
         background-color: aqua;
         box-shadow: #212121;
         border-radius: 10px 10px 10px 10px;
+}
+
+.dialog {
+	width: 600px;
+	height: 400px;
+	top: 30%;
+	left: 30%;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+	position: absolute;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
