@@ -6,11 +6,19 @@ body {
 .header {
 	box-shadow: 0px 0px 2px 0px;
 	padding: 10px;
+	display: flex;
+	font-family: monospace;
+	background-color: #2091f4;
+}
+
+.header-item {
+	align-self: center;
+	font-size: 20;
+	margin: auto 20px;
 }
 
 .title {
 	font-size: 40;
-	font-family: monospace;
 	margin: 10px;
 }
 
