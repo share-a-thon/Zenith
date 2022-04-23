@@ -157,3 +157,27 @@ button {
 	align-items: center;
 	justify-content: center;
 }
+
+.smoldialog {
+	width: 200px;
+	height: 200px;
+	top: 40%;
+	left: 40%;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+	position: absolute;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.smoldialog button {
+	margin: 5px;
+}
+
+.smoldialog button:hover {
+	cursor: pointer;
+}

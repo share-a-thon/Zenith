@@ -2,7 +2,6 @@ var dc, pc = new RTCPeerConnection();
 pc.onaddstream = e => v2.srcObject = e.stream;
 pc.ondatachannel = e => dcInit(dc = e.channel);
 pc.oniceconnectionstatechange = e => log(pc.iceConnectionState);
-
 var haveGum = navigator.mediaDevices.getUserMedia({video:true, audio:true})
   .then(stream => pc.addStream(v1.srcObject = stream)).catch(log);
 
@@ -82,16 +81,42 @@ file.onchange = e => {
     r.readAsText(file);
 }
 
+vidtoggle.onchange = e => {
+	if (vidtoggle.checked) {
+		var haveGum = navigator.mediaDevices.getUserMedia({video:true, audio:true})
+  .then(stream => pc.addStream(v1.srcObject = stream)).catch(log);
+	} else {
+		v1.srcObject = null;
+		pc.getSenders().forEach(i => {
+			pc.removeTrack(i);
+		});
+	}
+}
+
 function sendFile(file, name) {
     dc.send(JSON.stringify({type: "file", name: name, val: base64encode(file)}));
 }
 
 function saveFile(name, cont) {
-	console.log(cont);
-	var blob = new Blob([base64decode(cont)], {
-		type: "application/octet-stream"
-	});
-	saveAs(blob, name);
+	var d = document.createElement("div");
+	d.className = "smoldialog";
+	d.innerText = "You have received a file:\n" + name + "\nSAVE?";
+	let yesbutt = document.createElement("button");
+	yesbutt.innerText = "YASSSSS";
+	yesbutt.onclick = e => {
+		d.remove();
+		var blob = new Blob([base64decode(cont)], {
+			type: "application/octet-stream"
+		});
+		saveAs(blob, name);
+	}
+	let nobutt = document.createElement("button");
+	nobutt.innerText = "NOOOOOOO";
+	nobutt.onclick = e => {
+		d.remove();
+	}
+	d.append(yesbutt, nobutt);
+	document.body.append(d);
 }
 
 var enterPressed = e => e.keyCode == 13;
