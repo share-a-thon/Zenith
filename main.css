@@ -1,5 +1,5 @@
 body {
-	background-color: aliceblue;
+	background-color: #b1d2ef;
 	margin: 0px;
 }
 
@@ -43,4 +43,18 @@ body {
 	border: 1px solid black;
 	border-radius: 5px;
 	overflow: auto;
+}
+
+textarea {
+	border: 0px;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+button {
+	background-color: #498dff;
+	border: 0px;
+	font-size: inherit;
+	padding: 5px;
+	border-radius: 4px;
 }
