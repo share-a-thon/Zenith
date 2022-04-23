@@ -75,16 +75,16 @@ file.onchange = e => {
     r.onload = function(e) {
       sendFile(e.target.result, file.name);
     }
-    r.readAsText(file);
+    r.readAsBlob(file);
 }
 
 function sendFile(file, name) {
-    dc.send(JSON.stringify({type: "file", name: name, val: btoa(unescape(encodeURIComponent(file)))}));
+    dc.send(JSON.stringify({type: "file", name: name, val: base64encode(file)}));
 }
 
 function saveFile(name, cont) {
 	console.log(cont);
-	var blob = new Blob([decodeURIComponent(escape(atob(cont)))], {
+	var blob = new Blob([base64decode(cont)], {
 		type: "application/octet-stream"
 	});
 	saveAs(blob, name);
